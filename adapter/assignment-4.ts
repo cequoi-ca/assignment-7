@@ -22,8 +22,8 @@ export interface Filter {
 // Within a single filter, a book would need to match all the given conditions
 async function listBooks (filters?: Filter[]): Promise<Book[]> {
   // We then make the request
-  // const url = '/api/books'
-  const url = 'http://localhost:3000/books/list'
+  const url = '/api/books/list'
+  // const url = 'http://localhost:3000/books/list'
   const result = await fetch(url, { body: JSON.stringify(filters ?? []), method: 'POST' })
 
   if (result.ok) {
