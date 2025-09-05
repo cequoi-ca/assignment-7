@@ -5,7 +5,7 @@ import KoaRouter from '@koa/router'
 import bodyParser from 'koa-bodyparser'
 import { RegisterRoutes } from './build/routes'
 import swagger from './build/swagger.json'
-import { type Server, type IncomingMessage, type ServerResponse } from 'http'
+import { type Server, type IncomingMessage, type ServerResponse } from 'node:http'
 import { type AppBookDatabaseState, getBookDatabase } from './database_access'
 
 export default async function (port?: number, randomizeDbs?: boolean): Promise<{ server: Server<typeof IncomingMessage, typeof ServerResponse>, state: AppBookDatabaseState }> {

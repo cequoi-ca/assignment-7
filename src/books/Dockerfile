@@ -1,8 +1,8 @@
-FROM node:22-alpine
+FROM oven/bun:1-alpine
 
 WORKDIR /app
 
 COPY . .
 
-RUN npm install
-CMD ["npx", "tsx", "index.ts"]
+RUN bun install
+CMD ["bun", "run", "index.ts"]

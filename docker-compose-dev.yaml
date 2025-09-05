@@ -21,7 +21,7 @@ services:
       - mongo-books
       - rabbitmq
     environment:
-      - MONGO_URI=mongodb://mongo-books
+      - MONGO_URI=mongodb://mongo-books:27017/mcmasterful-books
       - AMQP_URL=amqp://rabbitmq:5672
       - PORT=3000
     ports:
@@ -32,6 +32,20 @@ services:
     image: mongo:latest
     ports:
       - 27017:27017
+    environment:
+      MONGO_INITDB_DATABASE: mcmasterful-books
+    volumes:
+      - mongo-data:/data/db
+      # all *.js/*.sh here run once on first boot of a fresh volume
+      - ./data/mongo-init-books:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 })"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
   rabbitmq:
     image: rabbitmq:management-alpine
+
+volumes:
+  mongo-data:
