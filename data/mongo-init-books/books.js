@@ -1,4 +1,3 @@
-// ./mongo-init/02-books.js
 // pick the DB explicitly for init scripts:
 db = db.getSiblingDB('mcmasterful-books');
 
